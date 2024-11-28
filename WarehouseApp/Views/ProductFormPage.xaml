@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WarehouseApp.Views.ProductFormPage"
+             Title="Add/Edit Product">
+    <StackLayout>
+        <Entry x:Name="NameEntry"
+               TextChanged="NameEntry_TextChanged"
+               Placeholder="Name" />
+        <Entry x:Name="PriceEntry"
+               TextChanged="PriceEntry_TextChanged"
+               Placeholder="Price"
+               Keyboard="Numeric" />
+        <Entry x:Name="QuantityEntry"
+               TextChanged="QuantityEntry_TextChanged"
+               Placeholder="Quantity"
+               Keyboard="Numeric" />
+        <Button Text="Save"
+                Clicked="Button_Clicked" />
+        <Button Text="Delete"
+                Clicked="Button_Clicked_1" />
+    </StackLayout>
+</ContentPage>

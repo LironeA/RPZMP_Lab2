@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:WarehouseApp.ViewModels"
+             xmlns:models="clr-namespace:WarehouseApp.Models"
+             x:Class="WarehouseApp.Views.ProductsPage"
+             x:DataType="vm:ProductsVM"
+             Title="ProductsPage">
+    <StackLayout>
+
+        <HorizontalStackLayout HeightRequest="25">
+
+            <Label Text="Фільтри"
+                   FontSize="14" />
+
+            <RadioButton x:Name="AllRadioButton"
+                CheckedChanged="AllRadioButton_CheckedChanged"
+                         Content="Усі" />
+            <RadioButton x:Name="RestsRadioButton"
+            CheckedChanged="RestsRadioButton_CheckedChanged"
+                         Content="Меньше 5" />
+            <!--<RadioButton Content="All"
+                         CheckedChanged="RadioButton_CheckedChanged"
+                         RadioButtonGroup.GroupName="FilterGroup" />
+
+            <RadioButton Content="Rests"
+                         CheckedChanged="RadioButton_CheckedChanged"
+                         RadioButtonGroup.GroupName="FilterGroup" />-->
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HeightRequest="25">
+
+            <Label Text="Максимальна ціна:"
+                   FontSize="14" />
+
+            <Label Text="{Binding MaxPrice}"
+                   FontSize="14" />
+
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HeightRequest="25">
+
+
+            <Label Text="Мінімальна ціна:"
+                   FontSize="14" />
+            <Label Text="{Binding MinPrice}"
+                   FontSize="14" />
+
+        </HorizontalStackLayout>
+
+        <Button Text="Add Product"
+                Command="{Binding AddProductCommand}"
+                HeightRequest="50" />
+
+        <CollectionView ItemsSource="{Binding Products}"
+                        VerticalOptions="Fill">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProductObservableModel">
+                    <Grid HeightRequest="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UpdateProductCommand, Source={RelativeSource AncestorType={x:Type vm:ProductsVM}}}"
+                                                  CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
+                        <Label Grid.Column="0"
+                               Grid.Row="0"
+                               Text="{Binding Name}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="Default" />
+
+                        <Label Grid.Column="0"
+                               Grid.Row="1"
+                               Text="{Binding Price}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               FontSize="Caption" />
+
+                        <Label Grid.Column="1"
+                               Grid.RowSpan="2"
+                               Text="{Binding Quantity, StringFormat='x{0}'}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>
